@@ -212,7 +212,7 @@ while True:
   show_high_scores()
 
   # Test harness: use keyboard to input score you want to insert.
-  my_score = input("type in score (or ctl-c to quit):")
+  my_score = input("type in score (or ctl-c to quit):  ")
 
   # Is that score big enough to go into our list?
   if eval_score(my_score):
