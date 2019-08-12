@@ -1,3 +1,5 @@
+# High score test program for PS3 controller.
+
 from time import sleep
 
 from evdev import InputDevice, categorize, ecodes
@@ -206,9 +208,35 @@ def input_name():
   return(name_string) 
   
 ##################################
+#  Write high score data
+#     Will overwrite the "high_scores.txt" file
+##################################
+def write_high_scores():
+  global high_scores
+
+  with open('high_scores.txt','w') as f:
+    for score in high_scores:
+      f.write(str(score[0])+","+score[1]+"\n")
+
+####################################
+# Read high score file into high_scores list
+####################################
+def read_high_scores():
+  global high_scores
+
+  with open('high_scores.txt','r') as f:
+    del high_scores[:]
+    for line in f:
+      line = line.strip()
+      score = line.split(",")     
+      score[0] = int(score[0])
+      high_scores.append(score)
+
+##################################
 # Main loop 
 ###################################
 while True:
+  read_high_scores()
   show_high_scores()
 
   # Test harness: use keyboard to input score you want to insert.
@@ -220,6 +248,7 @@ while True:
     high_scores.append([my_score,my_name]) 
     high_scores.sort(key=sort_scores,reverse=True)
     del high_scores[-1]
+    write_high_scores()
 
   else:
     print("not big enough to make list")

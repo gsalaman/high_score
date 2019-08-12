@@ -1,0 +1,5 @@
+56,XXX
+30,GLE
+10,AAA
+6,AAA
+4,ABC
